@@ -41,8 +41,8 @@ export class IdeasFiltersComponent implements OnInit {
   }
 
   onTagChange(): void {
-    let filteredTags = this.ideaTagFromControls.filter(tag => tag.checked === true);
-    let tagIds = filteredTags.map(tag => tag.id);
+    const filteredTags = this.ideaTagFromControls.filter(tag => tag.checked === true);
+    const tagIds = filteredTags.map(tag => tag.id);
     this.filterByTag(tagIds);
   }
 
