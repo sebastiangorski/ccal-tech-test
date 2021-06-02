@@ -7,15 +7,24 @@ import {
   createSelector,
 } from '@ngxs/store';
 import { Idea } from '@ccal-apps/core';
-import { CreateIdea, RemoveIdea, UpdateIdea } from './ideas.actions';
+import {
+  CreateIdea, FilterIdeasById,
+  FilterIdeasByTags,
+  RemoveIdea,
+  SortIdeasByDate,
+  SortIdeasByName,
+  UpdateIdea
+} from './ideas.actions';
 import { append, removeItem, updateItem } from '@ngxs/store/operators';
-import { mockIdeas } from './ideas.data';
+
+import { filterIdeasByTagIds, getIdeaById, sortIdeasByDate, sortIdeasByName } from '../_utilities/ideas.utilities';
+import { getIdeas } from './ideas.data';
 
 export const IDEAS_STATE_TOKEN = new StateToken<Idea[]>('ideas');
 
 @State<Idea[]>({
   name: IDEAS_STATE_TOKEN,
-  defaults: mockIdeas,
+  defaults: getIdeas(0, 100)
 })
 @Injectable()
 export class IdeasState {
@@ -40,5 +49,25 @@ export class IdeasState {
     return ctx.setState(
       updateItem<Idea>((idea) => idea.id === action.idea.id, action.idea)
     );
+  }
+
+  @Action(SortIdeasByDate)
+  sortIdeasByDate(ctx: StateContext<Idea[]>, action: SortIdeasByDate) {
+    return ctx.setState(sortIdeasByDate(action.ideas));
+  }
+
+  @Action(SortIdeasByName)
+  sortIdeasByName(ctx: StateContext<Idea[]>, action: SortIdeasByName) {
+    return ctx.setState(sortIdeasByName(action.ideas));
+  }
+
+  @Action(FilterIdeasByTags)
+  filterIdeasByTags(ctx: StateContext<Idea[]>, action: FilterIdeasByTags) {
+    return ctx.setState(filterIdeasByTagIds(action.ideas, action.tagIds));
+  }
+
+  @Action(FilterIdeasById)
+  filterIdeasById(ctx: StateContext<Idea[]>, action: FilterIdeasById) {
+    return ctx.setState(getIdeaById(action.ideas, action.ideaId));
   }
 }

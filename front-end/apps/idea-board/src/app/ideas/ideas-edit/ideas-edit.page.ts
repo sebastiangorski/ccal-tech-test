@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { IdeaTagsState } from '../_stores/idea-tags.state';
 import { IdeasState } from '../_stores/ideas.state';
-import { CreateIdea, UpdateIdea } from '../_stores/ideas.actions';
+import { CreateIdea, RemoveIdea, UpdateIdea } from '../_stores/ideas.actions';
 import { map, switchMap, take } from 'rxjs/operators';
 @Component({
   templateUrl: './ideas-edit.page.html',
@@ -32,7 +32,8 @@ export class IdeasEditPage implements OnInit {
   }
 
   deleteIdea(ideaId: string): void {
-    console.log(`ToDo: Delete Idea ID: ${ideaId}`);
+    this.store.dispatch(new RemoveIdea(ideaId));
+    this.backToIdeas();
   }
 
   backToIdeas(): void {

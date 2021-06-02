@@ -22,4 +22,10 @@
     margin-bottom: var(--spacing-small);
     flex-grow: 1;
   }
+
+  &__item-date {
+    .strong {
+      font-weight: 700;
+    }
+  }
 }

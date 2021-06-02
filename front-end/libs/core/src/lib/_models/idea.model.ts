@@ -3,4 +3,5 @@ export interface Idea {
   name: string;
   description: string;
   tagIds: string[];
+  createdAt: Date;
 }

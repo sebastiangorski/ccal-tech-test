@@ -25,6 +25,7 @@ export class IdeasEditorComponent implements OnChanges {
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     tagIds: new FormControl([]),
+    createdAt: new FormControl([])
   });
 
   @Input()
@@ -58,6 +59,7 @@ export class IdeasEditorComponent implements OnChanges {
       name: '',
       description: '',
       tagIds: [],
+      createdAt: null,
     };
   }
 
@@ -77,6 +79,8 @@ export class IdeasEditorComponent implements OnChanges {
   }
 
   onSaveClick(): void {
+    const currentDate = new Date();
+    this.ideaForm.patchValue({createdAt: currentDate});
     const ideaPayload = this.ideaForm.value;
     this.idea
       ? this.updateIdea.emit(ideaPayload)

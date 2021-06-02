@@ -1,11 +1,12 @@
 <div class="listing">
-  <a class="listing__item" *ngFor="let idea of ideas" [routerLink]="[idea.id]">
+  <a class="listing__item" *ngFor="let idea of ideasWithTags" [routerLink]="[idea.id]">
     <h3>{{ idea.name }}</h3>
     <p class="listing__item-desc">{{ idea.description }}</p>
+    <p class="listing__item-date"><span class="strong">Created at:</span> {{idea.createdAt | date}}</p>
     <div class="listing__item-tags">
       <ccal-idea-tag
-        *ngFor="let tagId of idea.tagIds"
-        [ideaTag]="getTagById(tagId)"
+        *ngFor="let tag of idea.fullTags"
+        [ideaTag]="tag"
       ></ccal-idea-tag>
     </div>
   </a>

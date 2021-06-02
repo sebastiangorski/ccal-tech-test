@@ -9,6 +9,11 @@
   </div>
 </header>
 
+<ccal-ideas-filters
+        [ideas]="ideas$ | async"
+        [ideaTags]="ideaTags$ | async">
+</ccal-ideas-filters>
+
 <ccal-ideas-listing
   [ideas]="ideas$ | async"
   [ideaTags]="ideaTags$ | async"

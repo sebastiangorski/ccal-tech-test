@@ -1,0 +1,32 @@
+.filters-wrapper {
+  margin-bottom: 1rem;
+
+  .sorter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .filters {
+    display: flex;
+    align-items: center;
+
+    &--tag {
+      display: flex;
+      list-style: none;
+      li {margin: 0;}
+    }
+
+    &--ideaId {
+      background-color: var(--components-bg-color);
+      border: 1px solid var(--border-color);
+    }
+
+  }
+
+  &--title {
+    margin-right: 1rem;
+    font-weight: 700;
+  }
+
+}
